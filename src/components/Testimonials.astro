@@ -1,0 +1,145 @@
+---
+const testimonials = [
+  {
+    name: 'María González',
+    location: 'Hermosillo, Sonora',
+    rating: 5,
+    text: 'Los tamales de Castro Alimentos son exactamente como los hacía mi abuela. No puedo creer que los encuentre en el super, son increíbles. El sabor es completamente auténtico.',
+    avatar: 'MG',
+  },
+  {
+    name: 'Roberto Sánchez',
+    location: 'Obregón, Sonora',
+    rating: 5,
+    text: 'La cochinita pibil es de lo mejor que he probado. Siempre la uso para mis reuniones familiares y todos quedan encantados. Definitivamente la mejor opción del mercado.',
+    avatar: 'RS',
+  },
+  {
+    name: 'Ana Martínez',
+    location: 'Nogales, Sonora',
+    rating: 5,
+    text: 'El chorizo Castro Alimentos es el único que compro. Tiene un balance perfecto de especias y la calidad se nota desde que lo abres. Lo recomiendo al 100%.',
+    avatar: 'AM',
+  },
+  {
+    name: 'Carlos Ruiz',
+    location: 'Guaymas, Sonora',
+    rating: 5,
+    text: 'Llevo años siendo cliente de Castro Alimentos. La calidad es siempre consistente y los sabores son auténticamente mexicanos. ¡Los frijoles están deliciosos!',
+    avatar: 'CR',
+  },
+  {
+    name: 'Lucía Torres',
+    location: 'Navojoa, Sonora',
+    rating: 5,
+    text: 'Compro los tamales para las fiestas y siempre son un éxito total. La familia entera los adora. Increíble que tengan ese sabor casero en un producto de supermercado.',
+    avatar: 'LT',
+  },
+];
+---
+
+<section id="testimonios" class="py-20 lg:py-28 bg-[#3D1A0E]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <span class="inline-block text-sm font-semibold uppercase tracking-widest text-[#D4956A] mb-3">Testimonios</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-white" style="font-family: 'Playfair Display', serif;">
+        Lo que dicen nuestros clientes
+      </h2>
+    </div>
+
+    <!-- Testimonials slider -->
+    <div class="relative overflow-hidden" id="testimonials-container">
+      <div class="flex gap-5 transition-transform duration-500 ease-out" id="testimonials-track">
+        {testimonials.map((t) => (
+          <div class="shrink-0 w-full sm:w-[calc(50%-10px)] lg:w-[calc(33.333%-14px)] rounded-2xl bg-white/8 border border-white/10 p-6 backdrop-blur-sm">
+            <!-- Stars -->
+            <div class="flex gap-0.5 mb-4">
+              {Array.from({ length: t.rating }).map(() => (
+                <svg class="w-4 h-4 text-[#D4956A]" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                </svg>
+              ))}
+            </div>
+
+            <blockquote class="text-white/85 text-sm leading-relaxed mb-5 italic">
+              "{t.text}"
+            </blockquote>
+
+            <!-- Author -->
+            <div class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full bg-[#7B3F2D] flex items-center justify-center text-white text-xs font-bold">
+                {t.avatar}
+              </div>
+              <div>
+                <p class="text-white text-sm font-semibold">{t.name}</p>
+                <p class="text-white/50 text-xs">{t.location}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Navigation dots -->
+    <div class="flex justify-center gap-2 mt-8" id="testimonials-dots">
+      {testimonials.map((_, i) => (
+        <button
+          data-index={i}
+          class={`w-2 h-2 rounded-full transition-all duration-300 ${i === 0 ? 'bg-[#D4956A] w-6' : 'bg-white/30'}`}
+          aria-label={`Testimonio ${i + 1}`}
+        />
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('testimonials-track') as HTMLElement;
+  const dots = document.querySelectorAll('#testimonials-dots button');
+  let current = 0;
+  let itemsVisible = 1;
+
+  function getItemsVisible() {
+    if (window.innerWidth >= 1024) return 3;
+    if (window.innerWidth >= 640) return 2;
+    return 1;
+  }
+
+  function getItemWidth() {
+    itemsVisible = getItemsVisible();
+    const gap = 20;
+    return (track.parentElement!.offsetWidth - gap * (itemsVisible - 1)) / itemsVisible;
+  }
+
+  function goTo(index: number) {
+    const total = dots.length;
+    current = Math.max(0, Math.min(index, total - itemsVisible));
+    const itemWidth = getItemWidth();
+    const gap = 20;
+    track.style.transform = `translateX(-${current * (itemWidth + gap)}px)`;
+    dots.forEach((dot, i) => {
+      const btn = dot as HTMLButtonElement;
+      if (i === current) {
+        btn.classList.add('bg-[#D4956A]', 'w-6');
+        btn.classList.remove('bg-white/30', 'w-2');
+      } else {
+        btn.classList.remove('bg-[#D4956A]', 'w-6');
+        btn.classList.add('bg-white/30', 'w-2');
+      }
+    });
+  }
+
+  dots.forEach((dot, i) => {
+    dot.addEventListener('click', () => goTo(i));
+  });
+
+  // Auto-advance every 4 seconds
+  setInterval(() => {
+    itemsVisible = getItemsVisible();
+    const next = (current + 1) % (dots.length - itemsVisible + 1);
+    goTo(next);
+  }, 4000);
+
+  window.addEventListener('resize', () => goTo(current));
+</script>

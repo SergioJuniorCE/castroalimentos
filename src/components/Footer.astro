@@ -1,0 +1,88 @@
+---
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-[#3D1A0E] text-white/70">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-10">
+      <!-- Brand -->
+      <div class="sm:col-span-2 lg:col-span-1">
+        <div class="flex items-center gap-3 mb-4">
+          <img src="/images/logo.png" alt="Productos CASA" class="w-12 h-12 object-contain rounded-full bg-white/10 p-1" />
+          <div>
+            <p class="text-xs text-[#D4956A] font-medium leading-none">Productos</p>
+            <p class="text-xl font-bold text-white leading-tight" style="font-family: 'Playfair Display', serif;">CASA</p>
+          </div>
+        </div>
+        <p class="text-sm leading-relaxed text-white/60">
+          Con todo el sabor de casa. Castro Alimentos, S.A. de C.V.
+        </p>
+      </div>
+
+      <!-- Products -->
+      <div>
+        <h4 class="text-white font-semibold text-sm mb-4">Productos</h4>
+        <ul class="space-y-2">
+          {['Tamales', 'Cochinita Pibil', 'Chorizo', 'Cabeza', 'Costilla', 'Frijol'].map((p) => (
+            <li>
+              <a href="#productos" class="text-sm hover:text-[#D4956A] transition-colors">{p}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Links -->
+      <div>
+        <h4 class="text-white font-semibold text-sm mb-4">Empresa</h4>
+        <ul class="space-y-2">
+          {[
+            { label: 'Nosotros', href: '#nosotros' },
+            { label: 'Dónde comprar', href: '#donde-comprar' },
+            { label: 'Galería', href: '#galeria' },
+            { label: 'Contacto', href: '#contacto' },
+          ].map((link) => (
+            <li>
+              <a href={link.href} class="text-sm hover:text-[#D4956A] transition-colors">{link.label}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="text-white font-semibold text-sm mb-4">Contacto</h4>
+        <ul class="space-y-2">
+          <li>
+            <a href="tel:6444179660" class="text-sm hover:text-[#D4956A] transition-colors flex items-center gap-2">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              644 417 9660
+            </a>
+          </li>
+          <li>
+            <a href="https://www.castroalimentos.com" target="_blank" rel="noopener noreferrer" class="text-sm hover:text-[#D4956A] transition-colors flex items-center gap-2">
+              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              castroalimentos.com
+            </a>
+          </li>
+          <li class="text-sm flex items-center gap-2">
+            <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            </svg>
+            Sonora, México
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="pt-6 border-t border-white/10 text-center">
+      <p class="text-xs text-white/40">
+        © {currentYear} Castro Alimentos, S.A. de C.V. — Todos los derechos reservados.
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,73 @@
+---
+const galleryItems = [
+  {
+    src: '/images/cochinita-banner.png',
+    alt: 'Tacos de cochinita pibil Castro Alimentos',
+    label: 'Cochinita Pibil',
+    span: 'lg:col-span-2',
+  },
+  {
+    src: '/images/tamales-autoservicios.png',
+    alt: 'Tamales Castro Alimentos',
+    label: 'Tamales',
+    span: '',
+  },
+  {
+    src: '/images/logo.png',
+    alt: 'Productos CASA Castro Alimentos',
+    label: 'Productos CASA',
+    span: '',
+    isLogo: true,
+  },
+];
+---
+
+<section id="galeria" class="py-20 lg:py-28 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center mb-14">
+      <span class="inline-block text-sm font-semibold uppercase tracking-widest text-[#A0522D] mb-3">Galería</span>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#3D1A0E]" style="font-family: 'Playfair Display', serif;">
+        Nuestros productos en imágenes
+      </h2>
+    </div>
+
+    <!-- Gallery grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
+      {galleryItems.map((item) => (
+        <div
+          class={`group relative rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 aspect-video ${item.span} ${item.isLogo ? 'bg-[#FFFDF9] flex items-center justify-center aspect-square' : ''}`}
+        >
+          <img
+            src={item.src}
+            alt={item.alt}
+            class={`${item.isLogo ? 'w-48 h-48 object-contain' : 'w-full h-full object-cover group-hover:scale-105 transition-transform duration-500'}`}
+          />
+          {!item.isLogo && (
+            <div class="absolute inset-0 bg-gradient-to-t from-[#3D1A0E]/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+              <span class="text-white font-semibold text-lg" style="font-family: 'Playfair Display', serif;">
+                {item.label}
+              </span>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+
+    <!-- Instagram CTA -->
+    <div class="mt-10 text-center">
+      <p class="text-[#5C2E1F]/60 text-sm mb-3">Síguenos en redes sociales para ver más contenido</p>
+      <a
+        href="https://www.castroalimentos.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 text-sm font-semibold text-[#7B3F2D] hover:text-[#5C2E1F] transition-colors"
+      >
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+        </svg>
+        www.castroalimentos.com
+      </a>
+    </div>
+  </div>
+</section>
