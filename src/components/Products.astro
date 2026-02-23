@@ -1,42 +1,60 @@
 ---
-const products = [
+const categories = [
   {
-    name: 'Tamales',
-    description: 'Tamales artesanales preparados con masa de maíz nixtamalizado y rellenos tradicionales. Disponibles en diferentes sabores.',
-    icon: '🫔',
-    tags: ['Tradicional', 'Artesanal'],
-    highlight: true,
+    title: 'Tamales',
+    description: 'Nuestra especialidad con el auténtico sabor de casa.',
+    items: [
+      {
+        name: 'Tamales',
+        description: 'Tamales artesanales preparados con masa de maíz nixtamalizado y rellenos tradicionales. Disponibles en diferentes sabores.',
+        icon: '🫔',
+        tags: ['Tradicional', 'Artesanal'],
+        highlight: true,
+      },
+    ],
   },
   {
-    name: 'Cochinita Pibil',
-    description: 'Cerdo marinado en achiote y jugo de naranja agria, cocido lentamente al estilo yucateco. Perfecta para tacos y tortas.',
-    icon: '🥩',
-    tags: ['Yucateco', 'Marinado'],
-    highlight: true,
+    title: 'Guisos Congelados',
+    description: 'Listos para calentar y servir, conservando todo el sabor tradicional.',
+    items: [
+      {
+        name: 'Cochinita Pibil',
+        description: 'Cerdo marinado en achiote y jugo de naranja agria, cocido lentamente al estilo yucateco. Perfecta para tacos y tortas.',
+        icon: '🥩',
+        tags: ['Yucateco', 'Marinado'],
+        highlight: true,
+      },
+      {
+        name: 'Cabeza',
+        description: 'Cabeza de res cocida a fuego lento con hierbas y especias. Un platillo tradicional lleno de sabor y textura.',
+        icon: '🍖',
+        tags: ['Tradicional', 'Cocción lenta'],
+      },
+      {
+        name: 'Costilla',
+        description: 'Costilla de cerdo preparada con adobo casero y cocida hasta lograr la ternura perfecta. Ideal para birria y guisados.',
+        icon: '🥓',
+        tags: ['Adobada', 'Jugosa'],
+      },
+      {
+        name: 'Frijol',
+        description: 'Frijol negro y pinto preparado con recetas caseras. Sin conservadores y con todo el sabor de la cocina mexicana tradicional.',
+        icon: '🫘',
+        tags: ['Sin conservadores', 'Casero'],
+      },
+    ],
   },
   {
-    name: 'Chorizo',
-    description: 'Chorizo artesanal elaborado con carne de cerdo y una mezcla de especias seleccionadas. Ideal para guisos, tacos y desayunos.',
-    icon: '🌶️',
-    tags: ['Especiado', 'Artesanal'],
-  },
-  {
-    name: 'Cabeza',
-    description: 'Cabeza de res cocida a fuego lento con hierbas y especias. Un platillo tradicional lleno de sabor y textura.',
-    icon: '🍖',
-    tags: ['Tradicional', 'Cocción lenta'],
-  },
-  {
-    name: 'Costilla',
-    description: 'Costilla de cerdo preparada con adobo casero y cocida hasta lograr la ternura perfecta. Ideal para birria y guisados.',
-    icon: '🥓',
-    tags: ['Adobada', 'Jugosa'],
-  },
-  {
-    name: 'Frijol',
-    description: 'Frijol negro y pinto preparado con recetas caseras. Sin conservadores y con todo el sabor de la cocina mexicana tradicional.',
-    icon: '🫘',
-    tags: ['Sin conservadores', 'Casero'],
+    title: 'Embutidos',
+    description: 'Nuestra línea de embutidos artesanales de la mejor calidad.',
+    items: [
+      {
+        name: 'Chorizo',
+        description: 'Chorizo artesanal elaborado con carne de cerdo y una mezcla de especias seleccionadas. Ideal para guisos, tacos y desayunos.',
+        icon: '🌶️',
+        tags: ['Especiado', 'Artesanal'],
+      },
+    ],
   },
 ];
 ---
@@ -44,9 +62,9 @@ const products = [
 <section id="productos" class="py-20 lg:py-28 bg-[#FFFDF9]">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <!-- Section header -->
-    <div class="text-center mb-14">
+    <div class="text-center mb-16">
       <span class="inline-block text-sm font-semibold uppercase tracking-widest text-[#A0522D] mb-3">Nuestros productos</span>
-      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#3D1A0E]" style="font-family: 'Playfair Display', serif;">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#3D1A0E]">
         Sabores que enamoran
       </h2>
       <p class="mt-4 text-lg text-[#5C2E1F]/70 max-w-2xl mx-auto">
@@ -54,40 +72,53 @@ const products = [
       </p>
     </div>
 
-    <!-- Products grid -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-      {products.map((product) => (
-        <div
-          class={`group relative rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 ${
-            product.highlight ? 'border-[#D4956A]/60 ring-1 ring-[#D4956A]/30' : 'border-[#D4956A]/20'
-          }`}
-        >
-          {product.highlight && (
-            <div class="absolute -top-3 left-5">
-              <span class="inline-block bg-[#7B3F2D] text-white text-xs font-semibold px-3 py-1 rounded-full">
-                Destacado
-              </span>
-            </div>
-          )}
-
-          <!-- Icon -->
-          <div class="w-14 h-14 rounded-xl bg-[#7B3F2D]/8 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
-            {product.icon}
+    <!-- Categories -->
+    <div class="space-y-20">
+      {categories.map((category) => (
+        <div>
+          <div class="mb-8">
+            <h3 class="text-2xl font-bold text-[#7B3F2D] mb-2" >
+              {category.title}
+            </h3>
+            <p class="text-[#5C2E1F]/70">{category.description}</p>
           </div>
 
-          <h3 class="text-xl font-bold text-[#3D1A0E] mb-2" style="font-family: 'Playfair Display', serif;">
-            {product.name}
-          </h3>
-          <p class="text-sm text-[#5C2E1F]/70 leading-relaxed mb-4">
-            {product.description}
-          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8 justify-items-center">
+            {category.items.map((product) => (
+              <div
+                class={`group relative rounded-2xl border bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1 w-full max-w-md ${
+                  product.highlight ? 'border-[#D4956A]/60 ring-1 ring-[#D4956A]/30' : 'border-[#D4956A]/20'
+                }`}
+              >
+                {product.highlight && (
+                  <div class="absolute -top-3 left-5">
+                    <span class="inline-block bg-[#7B3F2D] text-white text-xs font-semibold px-3 py-1 rounded-full">
+                      Destacado
+                    </span>
+                  </div>
+                )}
 
-          <!-- Tags -->
-          <div class="flex flex-wrap gap-2">
-            {product.tags.map((tag) => (
-              <span class="inline-block text-xs font-medium bg-[#D4956A]/15 text-[#7B3F2D] px-2.5 py-1 rounded-full border border-[#D4956A]/25">
-                {tag}
-              </span>
+                <!-- Icon -->
+                <div class="w-14 h-14 rounded-xl bg-[#7B3F2D]/8 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {product.icon}
+                </div>
+
+                <h4 class="text-xl font-bold text-[#3D1A0E] mb-2" >
+                  {product.name}
+                </h4>
+                <p class="text-sm text-[#5C2E1F]/70 leading-relaxed mb-4">
+                  {product.description}
+                </p>
+
+                <!-- Tags -->
+                <div class="flex flex-wrap gap-2">
+                  {product.tags.map((tag) => (
+                    <span class="inline-block text-xs font-medium bg-[#D4956A]/15 text-[#7B3F2D] px-2.5 py-1 rounded-full border border-[#D4956A]/25">
+                      {tag}
+                    </span>
+                  ))}
+                </div>
+              </div>
             ))}
           </div>
         </div>
